@@ -7,7 +7,9 @@ app = Flask(__name__)
 def hello():
     return f"""
     <h1>Мой Сервер</h1>
-    <a href="{url_for('index')}">Сайт</a><br>
+    <p><a href="{url_for('index')}">Сайт</a></p>
+    <p><a href="{url_for('start')}">Старт</a></p>
+    <p><a href="{url_for('base')}">База</a></p>
     """
 
 
@@ -24,6 +26,16 @@ def day(num):
 @app.route('/photo-<num>')
 def photo(num):
     return render_template(f'photo-{num}.html')
+
+
+@app.route('/start')
+def start():
+    return render_template('start.html')
+
+
+@app.route('/base')
+def base():
+    return render_template('base.html')
 
 
 if __name__ == '__main__':
