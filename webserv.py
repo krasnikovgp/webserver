@@ -1,21 +1,21 @@
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, request, redirect
 
 app = Flask(__name__)
+
+users = [
+    {'username': 'weldoy', 'password': '12345'}
+]
 
 
 @app.route('/')
 def hello():
     return f"""
     <h1>Мой Сервер</h1>
-    <p><a href="{url_for('index')}">Сайт</a></p>
-    <p><a href="{url_for('start')}">Старт</a></p>
-    <p><a href="{url_for('base')}">База</a></p>
+    <p><a href="{url_for('start')}">Старт</a></p></br>
+    <p><a href="{url_for('base')}">База</a></p></br>
+    <p><a href="{url_for('form')}">Форма обратной связи</a></p></br>
+    <p><a href="{url_for('auth')}">Форма авторизации</a></p></br>
     """
-
-
-@app.route('/index')
-def index():
-    return render_template('index.html')
 
 
 @app.route('/day-<num>')
@@ -36,6 +36,31 @@ def start():
 @app.route('/base')
 def base():
     return render_template('base.html')
+
+
+@app.route('/form', methods=['GET', 'POST'])
+def form():
+    if request.method == 'POST':
+        for item in request.form:
+            print(f"{item} = {request.form[item]}")
+    return render_template('form.html')
+
+
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
+    if request.method == 'POST':
+        for user in users:
+            if request.form['login'] == user['username']:
+                if request.form['password'] == user['password']:
+                    print('Авторизация успешна!')
+                    return redirect(url_for(f'profile', username=user['username']))
+        print('Неправильный логин или пароль!')
+    return render_template('auth.html')
+
+
+@app.route('/profile/<username>')
+def profile(username):
+    return render_template('start.html', username=username)
 
 
 if __name__ == '__main__':
