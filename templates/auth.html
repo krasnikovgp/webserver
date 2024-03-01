@@ -16,6 +16,11 @@
 {% block content %}
     <h2>Авторизация</h2>
     <p>Войдите на сайт, чтобы получить функционал</p>
+
+    {% for cat, msg in get_flashed_messages(with_categories=True) %}
+        <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+
     <form class="feedback-form" action="/auth" method="post">
         <p>
             <label for="login">Логин:</label>

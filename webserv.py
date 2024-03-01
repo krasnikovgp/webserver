@@ -1,6 +1,7 @@
-from flask import Flask, url_for, render_template, request, redirect
+from flask import Flask, url_for, render_template, request, redirect, flash, session
 
 app = Flask(__name__)
+app.secret_key = 'SECRET'
 
 users = [
     {'username': 'weldoy', 'password': '12345'}
@@ -49,12 +50,19 @@ def form():
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'POST':
+        if session.get('username'):
+            return redirect(url_for(f'profile', username=session['username']))
         for user in users:
             if request.form['login'] == user['username']:
                 if request.form['password'] == user['password']:
-                    print('Авторизация успешна!')
+                    flash('Авторизация успешна!', 'success')
+                    session['username'] = user['username']
                     return redirect(url_for(f'profile', username=user['username']))
-        print('Неправильный логин или пароль!')
+                else:
+                    flash('Неправильный логин или пароль!', 'error')
+                    break
+        else:
+            flash('Неправильный логин или пароль!', 'error')
     return render_template('auth.html')
 
 

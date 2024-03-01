@@ -13,7 +13,11 @@
       <div class="avatar-container">
         <img class="avatar" src="{{ url_for('static', filename='img/raccoon.svg') }}" width="80" height="80" alt="Аватарка">
       </div>
-      {% block navigation %}{% endblock %}
+      {% block navigation %}
+      <nav class="blog-navigation">
+        <a href="{{ url_for('start') }}">На главную</a>
+      </nav>
+      {% endblock %}
     </header>
     <main>
       {% block content %}{% endblock %}
