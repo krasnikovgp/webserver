@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
-{% block navigation %}
+{% block header %}
+  <h1 class="page-title">Сайт начинающего верстальщика </h1>
+{% endblock %}
+{% for cat, msg in get_flashed_messages(with_categories=True) %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+{% endfor %}
+{% block content %}
 <nav class="blog-navigation">
   <h2>Записи в блоге</h2>
   <ul>
@@ -19,6 +25,7 @@
     <li><a href="{{ url_for('day', num=13) }}">День тринадцатый. Нашёл статью</a></li>
     <li><a href="{{ url_for('day', num=14) }}">День четырнадцатый. Новый формат</a></li>
     <li><a href="{{ url_for('day', num=15) }}">День пятнадцатый. Галерея селфи</a></li>
+    <li><a href="{{ url_for('day', num=16) }}">День шестнадцатый. Flask</a></li>
   </ul>
 </nav>
 <section>
@@ -27,14 +34,13 @@
 </section>
 <section>
   <h2>Навыки</h2>
-  <dl class="skills">
-    <dt>HTML</dt>
-    <dd><div class="skills-level skills-level-ok" style="width: 60%;">60%</div></dd>
-    <dt>CSS</dt>
-    <dd><div class="skills-level" style="width: 20%;">20%</div></dd>
-    <dt>JS</dt>
-    <dd><div class="skills-level" style="width: 10%;">10%</div></dd>
-  </dl>
+    <dl class="skills">
+      <dt>HTML</dt>
+      <dd><div class="skills-level skills-level-ok" style="width: 60%;">60%</div></dd>
+      <dt>CSS</dt>
+      <dd><div class="skills-level" style="width: 20%;">20%</div></dd>
+      <dt>JS</dt>
+      <dd><div class="skills-level" style="width: 10%;">10%</div></dd>
+    </dl>
 </section>
-
 {% endblock %}

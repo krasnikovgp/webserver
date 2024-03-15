@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+
+    {{ super() }}
+    <link rel="stylesheet" href={{ url_for('static', filename='form-style.css') }}>
+{% endblock %}
+
+{% block content %}
+    {% for cat, msg in get_flashed_messages(with_categories=True) %}
+        <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+    <form class="feedback-form" action="{{ url_for('auth') }}" method="post">
+        <p>
+            <label for="fullname">Логин, пожалуйста:</label>
+            <input type="text" name="fullname" id="fullname">
+        </p>
+        <input class="btn" type="submit" value="Отправить">
+    </form>
+{% endblock %}

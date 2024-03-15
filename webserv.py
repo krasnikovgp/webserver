@@ -68,7 +68,9 @@ def auth():
 
 @app.route('/profile/<username>')
 def profile(username):
-    return render_template('start.html', username=username)
+    if username == session.get('username'):
+        return render_template('profile.html', username=username)
+    flash('Доступ запрещен', 'error')
 
 
 if __name__ == '__main__':
