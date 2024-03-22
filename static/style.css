@@ -8,6 +8,24 @@ body {
   background: #ffffff url("img/bg-page.png") no-repeat top center;
 }
 
+.abc {
+    display: flex;
+}
+
+.abc1 {
+    width: 500px;
+}
+
+.abc2 {
+    width: 1000px;
+    margin: 30px;
+}
+
+.ch {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
 h1 {
   font-weight: 400;
   font-size: 24px;
@@ -31,6 +49,7 @@ code {
   border-radius: 4px;
   color: #3632ad;
   font-family: "Courier New", "Courier", monospace;
+
 }
 
 pre {
